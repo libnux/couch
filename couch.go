@@ -204,11 +204,10 @@ func (db *Database) Insert(doc Identifiable) error {
 
 // Delete removes a document from the database.
 func (db *Database) Delete(docID, revID string) error {
+	url := db.docURL(docID)
 	if revID != "" {
-		url := db.docURL(docID) + `?rev=` + revID
-	} else {
-		url := db.docURL(docID)
-	}
+		 url += `?rev=` + revID
+	} 
 	_, err := Do(db.server.httpClient, url, "DELETE", db.Cred(), nil, nil)
 	return err
 }
