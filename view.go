@@ -1,5 +1,9 @@
 package couch
 
+import (
+	"encoding/json"
+)
+
 // CouchDB Design Document (not yet public)
 type design struct {
 	Doc
@@ -24,7 +28,7 @@ type ViewResultRow struct {
 	ID    string
 	Key   interface{}
 	Value interface{}
-	Doc   map[string]interface{}
+	Doc   json.RawMessage
 }
 
 func (r *ViewResultRow) ValueInt() int {
